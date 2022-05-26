@@ -1,17 +1,23 @@
 func islandPerimeter(grid [][]int) int {
-    m, n := len(grid), len(grid[0])
-    ans := 0
-    for i := 0; i < m; i++ {
-        for j := 0; j < n; j++ {
-            tmp := 0
+    
+    var res int
+    
+    for i:=0; i<len(grid); i++ {
+        
+        for j:=0; j<len(grid[0]); j++ {
+            
             if grid[i][j] == 1 {
-                if i == 0 || grid[i - 1][j] == 0 { tmp++ }
-                if i == m - 1 || grid[i + 1][j] == 0 { tmp++ }
-                if j == 0 || grid[i][j - 1] == 0 { tmp++ }
-                if j == n - 1 || grid[i][j + 1] == 0 { tmp++ }
+                res += 4
+                
+                if i>0 && grid[i-1][j] == 1 {
+                    res -= 2
+                }
+                
+                if j>0 && grid[i][j-1] == 1 {
+                    res -= 2
+                }
             }
-            ans += tmp
         }
     }
-    return ans
+    return res
 }
