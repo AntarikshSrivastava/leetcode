@@ -6,28 +6,18 @@
  * }
  */
 func getIntersectionNode(headA, headB *ListNode) *ListNode {
-	curA := headA
-	curB := headB
-	for curA != nil && curB != nil {
-		curA = curA.Next
-		curB = curB.Next
+	a, b := headA, headB
+	for a != b {
+		if a == nil {
+			a = headB
+		} else {
+			a = a.Next
+		}
+		if b == nil {
+			b = headA
+		} else {
+			b = b.Next
+		}
 	}
-
-	for curA != nil {
-		headA = headA.Next
-		curA = curA.Next
-	}
-
-	for curB != nil {
-		headB = headB.Next
-		curB = curB.Next
-	}
-
-	for headA != headB {
-		headA = headA.Next
-		headB = headB.Next
-	}
-
-	return headA
+	return a
 }
-
