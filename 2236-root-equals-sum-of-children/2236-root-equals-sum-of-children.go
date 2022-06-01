@@ -7,5 +7,5 @@
  * }
  */
 func checkTree(root *TreeNode) bool {
-    return root.Val == root.Left.Val + root.Right.Val
+    return root.Left.Val + root.Right.Val == root.Val
 }
