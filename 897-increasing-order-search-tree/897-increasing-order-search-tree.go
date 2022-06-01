@@ -6,28 +6,30 @@
  *     Right *TreeNode
  * }
  */
-func increasingBST(root *TreeNode) *TreeNode {
-    arr := []*TreeNode{}
-    inorder(root, &arr)
-    
-    res := arr[0]
-    curr := res
-    
-    for _, n := range arr[1:] {
-        curr.Left = nil
-        curr.Right = n
-        curr = n
-    }
-    curr.Right = nil
-    curr.Left = nil
-    return res
-}
+var prev *TreeNode
 
-func inorder(root *TreeNode, arr *[]*TreeNode) {
-    if root == nil {
+func inOrder(node *TreeNode) {
+
+    if node == nil {
         return
     }
-    inorder(root.Left, arr)
-    *arr = append(*arr, root)
-    inorder(root.Right, arr)
+    
+    inOrder(node.Left)
+    
+    prev.Right = node
+    prev = node
+    node.Left = nil
+    
+    inOrder(node.Right)
+    
+}
+
+func increasingBST(root *TreeNode) *TreeNode {
+    
+    ans := &TreeNode{-1, nil, nil}
+    prev = ans
+    
+    inOrder(root)
+    
+    return ans.Right
 }
